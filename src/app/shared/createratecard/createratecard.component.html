@@ -1,0 +1,136 @@
+<div class="card bg-light mt-3">
+    <div class="card-header">
+        <span>New Rate Card Definition</span>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="market">Market</label>
+                            <select name="market" id="market" class="form-control">
+                                <option value="ATL">Atlanta,GA</option>
+                                <option value="BOS">Boston, MA</option>
+                                <option value="NYC">New York, NY</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" cols="3" rows="2" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="propsdescription">Proposal Description</label>
+                            <textarea name="propsdescription" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="">
+                                Effective Date
+                            </label>
+                            <p-calendar [(ngModel)]="value" showIcon="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="inventorymgmttype">Inventory Management Type</label>
+                            <select name="inventorymgmttype" id="inventorymgmttype" class="form-control">
+                                <option value="100">None</option>
+                                <option value="101">Any</option>
+                                <option value="102">Chng</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="Active">Active &nbsp; </label>
+                            <div>
+                                <input type="radio" name="active"> Yes
+                                <input type="radio" name="active"> No
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="productionschedule">Production Schedule</label>
+                            <select name="productionschedule" id="productionschedule" class="form-control">
+                                <option value="100">Atlanta Bus Exterior</option>
+                                <option value="101">Atlanta digital posters</option>
+                                <option value="102">Boston Metro Transit Rail</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="facility">Facility</label>
+                            <select name="facility" id="facility" class="form-control">
+                                <option value="100">Atlanta wally park airport</option>
+                                <option value="101">Atlanta Bus Exterior</option>
+                                <option value="102">Boston Metro Transit Rail</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="groupschedule">Group Schedule</label>
+                            <select name="groupschedule" id="groupschedule" class="form-control">
+                                <option value="100">Atlanta Digital Unit</option>
+                                <option value="101">Atlanta Bus Exterior</option>
+                                <option value="102">Boston Metro Transit Rail</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="billingrate">Billing Rate</label>
+                        <div *ngFor="let billing of billingRateControls; let i = index">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
+                                    <select name="billingrate" class="form-control">
+                                        <option value="1">1 Week</option>
+                                        <option value="2">2 Weeks</option>
+                                        <option value="3">3 Weeks</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-sm-3" style="padding-left: 1px;">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div style="margin-left: -18px;">
+                                    <button class="btn btn-sm btn-success" style="height: 34px;margin-top: 1px;" (click)="addControls()">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+
+                                    <button *ngIf="billingRateControls.length > 1" class="btn btn-sm btn-danger" style="height: 34px;margin-top: 1px;" (click)="removeControls(i)">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default">Clear All</button>
+            <button type="button" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-primary">Cancel</button>
+        </div>
+
+    </div>
+</div>

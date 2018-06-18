@@ -1,0 +1,282 @@
+<p-tabView>
+    <div style="border: 1px solid #777;">
+        <p-tabPanel header="Header">
+            <!-- <div *ngFor="let product of products" style="border: 1px solid grey;">
+                Id: {{product.id}}
+                <br> Title: {{product.title}}}
+                <br> Body: {{product.body}}}
+            </div> -->
+
+            <div *ngIf="isNewTableRecord">
+                <table class="table table-responsive table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>Market/Media</th>
+                            <th>Start/End Date</th>
+                            <th style="width: 120px;">Media</th>
+                            <th style="width: 160px;">Showing Type</th>
+                            <th style="width: 130px;">Units</th>
+                            <th>Duration</th>
+                            <th style="width: 165px;">Net Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{newTableRecord?.id}}
+                                <span>
+                                    <a href="javascript:" (click)="saveRecord()">
+                                        <i class="fa fa-pencil" style="padding:5px;"></i>
+                                    </a>
+                                </span>
+                            </td>
+                            <td>
+                                <p-calendar id="effeectiveDate" showIcon="true"></p-calendar>
+                            </td>
+                            <td>
+                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.media">
+                                    <option value="Digital Bulletins">Digital Bulletins</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.showingtype">
+                                    <option value="Unit">Unit</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" name="" id="" class="form-control" [(ngModel)]="newTableRecord.units">
+                            </td>
+                            <td>
+                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.duration">
+                                    <option value="1-4 Weeks">1-4 Weeks</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="text" class="form-control" [(ngModel)]="newTableRecord.netamt">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="text-right">
+                            <td colspan="7" class="p-1">
+                                <button class="btn btn-success" (click)="saveChanges()">
+                                    Save Showings
+                                </button>
+                                <button class="btn btn-secondary" (click)="cancel()">
+                                    Cancel
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <p-dataTable [value]="rows" electionMode="multiple" [editable]="true">
+                <p-column [style]="{'width':'38px'}" selectionMode="multiple"> </p-column>
+                <p-column [style]="{'width':'38px'}">
+                    <ng-template let-col let-prod="rowData" pTemplate="body">
+                        <div>
+                            <a href="javascript:" (click)="saveRecord()" title="Copy Record">
+                                <i class="fa fa-exchange" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                            </a>
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column *ngFor="let col of cols" field="{{col.field}}" header="{{col.header}}" [editable]="(isEditable)?true:false"></p-column>
+
+                <p-column styleClass="col-button">
+                    <ng-template pTemplate="header">
+                        <span>
+                            Billing Status
+                        </span>
+                    </ng-template>
+                    <ng-template let-prod="rowData" pTemplate="body">
+                        <span style="margin: 2px;" *ngIf="!isEditable">
+                            <a href="javascript:" (click)="copyRecord(prod)">
+                                <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                            </a>
+                        </span>
+                        <span style="margin: 2px;">
+                            <span *ngIf="!isEditable">
+                                <a href="javascript:" (click)="editRecord()">
+                                    <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
+                                </a>
+                            </span>
+
+                            <span *ngIf="isEditable">
+                                <a href="javascript:" (click)="saveRecord()">
+                                    <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
+                                </a>
+                                <a href="javascript:" (click)="cancelRecord()">
+                                    <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
+                                </a>
+                            </span>
+
+                        </span>
+                        <span style="margin: 7px;" *ngIf="!isEditable">
+                            <a href="javascript:" (click)="deleteRecord()">
+                                <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
+                            </a>
+                        </span>
+
+                    </ng-template>
+                </p-column>
+            </p-dataTable>
+
+        </p-tabPanel>
+        <p-tabPanel header="Showings">
+            <div style="padding-top:20px;">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Billing">
+                                Billing
+                            </label>
+                            <select name="Billing" id="Billing" class="form-control" style="height: 34px;">
+                                <option value="net">Net</option>
+                                <option value="gross">Gross</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">
+                                Start/End Date
+                            </label>
+                            <p-calendar [(ngModel)]="startEndDate" showIcon="true" selectionMode="range"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-3  col-sm-3" style="margin-top: 30px;">
+
+                        <p-splitButton label="Add New Showing" icon="fa fa-add" [model]="items" styleClass="ui-button-success"></p-splitButton>
+                        <!-- <button (click)="showTable()" class="btn btn-success">Add New Showing</button> -->
+                    </div>
+                    <div class="col-md-3  col-sm-3" style="margin-top: 20px; margin-left: -90px">
+                        <button class="btn btn-primary" (click)="createNewShowing()" style="height: 36px;">
+                            <i class="fa fa-plus"></i> Create New Showing </button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showProdTable">
+                <div class="container-fluid">
+                    <!-- <p-dataTable [value]="rows" electionMode="multiple" [editable]="true">
+                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"> </p-column>
+                        <p-column [style]="{'width':'38px'}">
+                            <ng-template let-col let-prod="rowData" pTemplate="body">
+                                <div>
+                                    <a href="javascript:" (click)="saveRecord()" title="Copy Record">
+                                        <i class="fa fa-exchange" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                                    </a>
+                                </div>
+                            </ng-template>
+                        </p-column>
+                        <p-column *ngFor="let col of cols" field="{{col.field}}" header="{{col.header}}" [editable]="(isEditable)?true:false"></p-column>
+        
+                        <p-column styleClass="col-button">
+                            <ng-template pTemplate="header">
+                                <span>
+                                    Billing Status
+                                </span>
+                            </ng-template>
+                            <ng-template let-prod="rowData" pTemplate="body">
+                                <span style="margin: 2px;" *ngIf="!isEditable">
+                                    <a href="javascript:" (click)="copyRecord(prod)">
+                                        <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                                    </a>
+                                </span>
+                                <span style="margin: 2px;">
+                                    <span *ngIf="!isEditable">
+                                        <a href="javascript:" (click)="editRecord()">
+                                            <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
+                                        </a>
+                                    </span>
+        
+                                    <span *ngIf="isEditable">
+                                        <a href="javascript:" (click)="saveRecord()">
+                                            <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
+                                        </a>
+                                        <a href="javascript:" (click)="cancelRecord()">
+                                            <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
+                                        </a>
+                                    </span>
+        
+                                </span>
+                                <span style="margin: 7px;" *ngIf="!isEditable">
+                                    <a href="javascript:" (click)="deleteRecord()">
+                                        <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
+                                    </a>
+                                </span>
+        
+                            </ng-template>
+                        </p-column>
+                    </p-dataTable> -->
+                </div>
+            </div>
+        </p-tabPanel>
+    </div>
+
+</p-tabView>
+
+
+
+<p-dialog [(visible)]="display" width="1000">
+    <p-header>
+        Showing Rate cards - Effective Date
+        <span *ngIf="startEndDate"> {{ startEndDate[0] | date: 'MM/dd/yyyy'}} - {{ startEndDate[1] | date: 'MM/dd/yyyy'}} </span>
+    </p-header>
+    <div>
+        <div class="form-group">
+            <div class="row col-md-12 col-sm-12">
+                <div class="col-md-3 col-sm-3">
+                    <label for="market">Market</label>
+                    <select name="" id="market" class="form-control">
+                        <option value="atlanta">Atlanta</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <label for="mediagroup">Media Group</label>
+                    <select name="" id="mediagroup" class="form-control">
+                        <option value="busext">Bus (Exterior)</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <label for="inventory">Inventory Type</label>
+                    <select name="" id="inventory" class="form-control">
+                        <option value="active">Active</option>
+                        <option value="inactive">InActive</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <label for="filter">Filter</label>
+                    <input type="text" class="form-control" id="filter">
+                </div>
+            </div>
+        </div>
+        <div style="margin: 5px 42px 5px  17px">
+            <p-accordion>
+                <p-accordionTab *ngFor="let media of mediaTypes" header="{{media.header}}" [selected]="media.selected">
+                    <ul style="list-style: none;">
+                        <li *ngFor="let content of media?.content">
+                            <label>
+                                <input type="checkbox">&nbsp;{{content}}
+                            </label>
+                            <span class="pull-right btn-sm btn-danger" style=" height: 24px;
+                            margin: 0px;
+                            padding: 2px;">
+                                <i class="fa fa-trash-o"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </div>
+</p-dialog>

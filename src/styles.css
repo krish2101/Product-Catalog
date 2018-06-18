@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import "node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "node_modules/font-awesome/css/font-awesome.min.css";
+@import "node_modules/primeicons/primeicons.css";
+@import "node_modules/primeng/resources/themes/omega/theme.css";
+@import "node_modules/primeng/resources/primeng.min.css";
+
+
+/* .ui-dialog-title{
+  background-color: blueviolet;
+  color: white;
+} */
+
+.ui-button .ui-button-text {
+    height: 32px !important;
+    margin-left: 10px !important;
+}
+.ui-splitbutton{
+    margin-left: 10px !important;
+}
+
+.btn{
+    margin: 7px;
+}

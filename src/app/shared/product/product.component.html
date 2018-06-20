@@ -2,132 +2,11 @@
     <div style="border: 1px solid #777;">
         <p-tabPanel header="Header">
             <!-- <div *ngFor="let product of products" style="border: 1px solid grey;">
-                Id: {{product.id}}
-                <br> Title: {{product.title}}}
-                <br> Body: {{product.body}}}
-            </div> -->
-
-            <div *ngIf="isNewTableRecord">
-                <table class="table table-responsive table-bordered">
-
-                    <thead>
-                        <tr>
-                            <th>Market/Media</th>
-                            <th>Start/End Date</th>
-                            <th style="width: 120px;">Media</th>
-                            <th style="width: 160px;">Showing Type</th>
-                            <th style="width: 130px;">Units</th>
-                            <th>Duration</th>
-                            <th style="width: 165px;">Net Amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>
-                                {{newTableRecord?.id}}
-                                <span>
-                                    <a href="javascript:" (click)="saveRecord()">
-                                        <i class="fa fa-pencil" style="padding:5px;"></i>
-                                    </a>
-                                </span>
-                            </td>
-                            <td>
-                                <p-calendar id="effeectiveDate" showIcon="true"></p-calendar>
-                            </td>
-                            <td>
-                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.media">
-                                    <option value="Digital Bulletins">Digital Bulletins</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.showingtype">
-                                    <option value="Unit">Unit</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="" id="" class="form-control" [(ngModel)]="newTableRecord.units">
-                            </td>
-                            <td>
-                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.duration">
-                                    <option value="1-4 Weeks">1-4 Weeks</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
-                                    </div>
-                                    <input type="text" class="form-control" [(ngModel)]="newTableRecord.netamt">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr class="text-right">
-                            <td colspan="7" class="p-1">
-                                <button class="btn btn-success" (click)="saveChanges()">
-                                    Save Showings
-                                </button>
-                                <button class="btn btn-secondary" (click)="cancel()">
-                                    Cancel
-                                </button>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <p-dataTable [value]="rows" electionMode="multiple" [editable]="true">
-                <p-column [style]="{'width':'38px'}" selectionMode="multiple"> </p-column>
-                <p-column [style]="{'width':'38px'}">
-                    <ng-template let-col let-prod="rowData" pTemplate="body">
-                        <div>
-                            <a href="javascript:" (click)="saveRecord()" title="Copy Record">
-                                <i class="fa fa-exchange" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
-                            </a>
-                        </div>
-                    </ng-template>
-                </p-column>
-                <p-column *ngFor="let col of cols" field="{{col.field}}" header="{{col.header}}" [editable]="(isEditable)?true:false"></p-column>
-
-                <p-column styleClass="col-button">
-                    <ng-template pTemplate="header">
-                        <span>
-                            Billing Status
-                        </span>
-                    </ng-template>
-                    <ng-template let-prod="rowData" pTemplate="body">
-                        <span style="margin: 2px;" *ngIf="!isEditable">
-                            <a href="javascript:" (click)="copyRecord(prod)">
-                                <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
-                            </a>
-                        </span>
-                        <span style="margin: 2px;">
-                            <span *ngIf="!isEditable">
-                                <a href="javascript:" (click)="editRecord()">
-                                    <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
-                                </a>
-                            </span>
-
-                            <span *ngIf="isEditable">
-                                <a href="javascript:" (click)="saveRecord()">
-                                    <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
-                                </a>
-                                <a href="javascript:" (click)="cancelRecord()">
-                                    <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
-                                </a>
-                            </span>
-
-                        </span>
-                        <span style="margin: 7px;" *ngIf="!isEditable">
-                            <a href="javascript:" (click)="deleteRecord()">
-                                <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
-                            </a>
-                        </span>
-
-                    </ng-template>
-                </p-column>
-            </p-dataTable>
+                    Id: {{product.id}}
+                    <br> Title: {{product.title}}}
+                    <br> Body: {{product.body}}}
+                </div> -->
+          
 
         </p-tabPanel>
         <p-tabPanel header="Showings">
@@ -155,69 +34,252 @@
                     </div>
                     <div class="col-md-3  col-sm-3" style="margin-top: 30px;">
 
-                        <p-splitButton label="Add New Showing" icon="fa fa-add" [model]="items" styleClass="ui-button-success"></p-splitButton>
+                        <p-splitButton label="Select Showing" icon="fa fa-add" [model]="items" styleClass="ui-button-success"></p-splitButton>
                         <!-- <button (click)="showTable()" class="btn btn-success">Add New Showing</button> -->
                     </div>
                     <div class="col-md-3  col-sm-3" style="margin-top: 20px; margin-left: -90px">
                         <button class="btn btn-primary" (click)="createNewShowing()" style="height: 36px;">
-                            <i class="fa fa-plus"></i> Create New Showing </button>
+                            <i class="fa fa-plus"></i> Add New Showing </button>
                     </div>
                 </div>
             </div>
 
             <div *ngIf="showProdTable">
                 <div class="container-fluid">
-                    <!-- <p-dataTable [value]="rows" electionMode="multiple" [editable]="true">
-                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"> </p-column>
-                        <p-column [style]="{'width':'38px'}">
-                            <ng-template let-col let-prod="rowData" pTemplate="body">
-                                <div>
-                                    <a href="javascript:" (click)="saveRecord()" title="Copy Record">
-                                        <i class="fa fa-exchange" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
-                                    </a>
-                                </div>
-                            </ng-template>
-                        </p-column>
-                        <p-column *ngFor="let col of cols" field="{{col.field}}" header="{{col.header}}" [editable]="(isEditable)?true:false"></p-column>
-        
-                        <p-column styleClass="col-button">
-                            <ng-template pTemplate="header">
-                                <span>
-                                    Billing Status
-                                </span>
-                            </ng-template>
-                            <ng-template let-prod="rowData" pTemplate="body">
-                                <span style="margin: 2px;" *ngIf="!isEditable">
-                                    <a href="javascript:" (click)="copyRecord(prod)">
-                                        <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
-                                    </a>
-                                </span>
-                                <span style="margin: 2px;">
-                                    <span *ngIf="!isEditable">
-                                        <a href="javascript:" (click)="editRecord()">
-                                            <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
-                                        </a>
-                                    </span>
-        
-                                    <span *ngIf="isEditable">
-                                        <a href="javascript:" (click)="saveRecord()">
-                                            <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
-                                        </a>
-                                        <a href="javascript:" (click)="cancelRecord()">
-                                            <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
-                                        </a>
-                                    </span>
-        
-                                </span>
-                                <span style="margin: 7px;" *ngIf="!isEditable">
-                                    <a href="javascript:" (click)="deleteRecord()">
-                                        <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
-                                    </a>
-                                </span>
-        
-                            </ng-template>
-                        </p-column>
-                    </p-dataTable> -->
+                        <div *ngIf="isNewTableRecord">
+                                <!-- {{newTableRecord | json}} -->
+                                <table class="table table-responsive table-bordered">
+                                    <thead class="mythead">
+                                        <tr>
+                                            <th>Market/Media</th>
+                                            <th>Start/End Date</th>
+                                            <th style="width: 228px;">Media</th>
+                                            <th style="width: 160px;">Showing Type</th>
+                                            <th style="width: 130px;">Units</th>
+                                            <th>Duration</th>
+                                            <th style="width: 165px;">Net Amount</th>
+                                        </tr>
+                                    </thead>
+                
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <b>{{newTableRecord?.id['market']}}</b>
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        <b>Coverage:</b>
+                                                    </span> {{newTableRecord?.id['coverage']}}</div>
+                                                <div class="badge badge-primary p-1" style="font-size: 15px;">{{newTableRecord?.id['type']}}</div>
+                
+                
+                                                <span>
+                                                    <a href="javascript:" (click)="saveRecord()">
+                                                        <i class="fa fa-pencil" style="padding:5px;"></i>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <p-calendar id="effeectiveDate" showIcon="true" [(ngModel)]="newTableRecord.date" selectionMode="range"></p-calendar>
+                                            </td>
+                                            <td>
+                                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.media">
+                                                    <option value="Digital Bulletins">Digital Bulletins</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.showingtype">
+                                                    <option value="Unit">Unit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="" id="" class="form-control" [(ngModel)]="newTableRecord.units">
+                                            </td>
+                                            <td>
+                                                <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.duration">
+                                                    <option value="1-4 weeks">1-4 Weeks</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" [(ngModel)]="newTableRecord.netamt">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="text-right">
+                                            <td colspan="7" class="p-1">
+                                                <button class="btn btn-success" (click)="saveChanges()">
+                                                    Save Showings
+                                                </button>
+                                                <button class="btn btn-secondary" (click)="cancel()">
+                                                    Cancel
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <p-dataTable [value]="rows" electionMode="multiple" [editable]="true" [immutable]="false">
+                                <p-column [style]="{'width':'38px'}" selectionMode="multiple"> </p-column>
+                                <p-column [style]="{'width':'38px'}">
+                                    <ng-template let-col let-prod="rowData" pTemplate="body">
+                                        <div>
+                                            <a href="javascript:" (click)="saveRecord()" title="Copy Record">
+                                                <i class="fa fa-exchange" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                                            </a>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="id" header="Market/Media" [style]="{'width':'230px'}">
+                                    <ng-template let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            <div>
+                                                <b>{{row.id.market}}</b>
+                                            </div>
+                                            <div>
+                                                <span>
+                                                    <b>Coverage:</b>
+                                                </span> {{row.id.coverage}}</div>
+                                            <div class="badge badge-primary p-1" style="font-size: 15px;">{{row.id.type}}</div>
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <div>
+                                                <b>{{row.id.market}}
+                                                    <a href="javascipt:void()">
+                                                        <span>
+                                                            <i class="fa fa-pencil"></i>
+                                                        </span>
+                                                    </a>
+                                                </b>
+                                            </div>
+                                            <div>
+                                                <span>
+                                                    <b>Coverage:</b>
+                                                </span> {{row.id.coverage}}</div>
+                                            <div class="badge badge-primary p-1" style="font-size: 15px;">{{row.id.type}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                
+                                <p-column field="date" header="Start/End Date" [style]="{'width':'240px'}">
+                                    <ng-template let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            {{row.date}}
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <p-calendar showIcon="true" [style]="{'width':'200px'}" [(ngModel)]="row.date" selectionMode="range"></p-calendar>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                
+                                <p-column field="media" header="Media">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            {{row.media}}
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <select class="form-control" [(ngModel)]="row.media">
+                                                <option value="Digital Bulletins">Digital Bulletins</option>
+                                            </select>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="showingtype" header="Showing Type">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            {{row.showingtype}}
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <select class="form-control" [(ngModel)]="row.showingtype">
+                                                <option value="Unit">Unit</option>
+                                            </select>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="units" header="Units">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            {{row.units}}
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <input type="text" class="form-control" [(ngModel)]="row.units">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="duration" header="Duration">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            {{row.duration}}
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <select class="form-control" [(ngModel)]="row.duration">
+                                                <option value="1-4 weeks">1-4 Weeks</option>
+                                            </select>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="netamt" header="Net Amount">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div *ngIf="!row.isEditable">
+                                            <span>$</span>
+                                            <span>{{row[col.field]}}</span>
+                                        </div>
+                                        <div *ngIf="row.isEditable">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                                <input type="text" class="form-control" [(ngModel)]="row.netamt">
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                
+                                <p-column styleClass="col-button" [style]="{'width':'120px'}">
+                                    <ng-template pTemplate="header">
+                                        <span>
+                                            Billing Status
+                                        </span>
+                                    </ng-template>
+                                    <ng-template let-row="rowData" pTemplate="body" let-i="rowIndex">
+                                        <div class="text-center">
+                                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                                                <a href="javascript:" (click)="copyRecord(row)">
+                                                    <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                                                </a>
+                                            </span>
+                                            <span style="margin: 2px;">
+                                                <span *ngIf="!row.isEditable">
+                                                    <a href="javascript:" (click)="editRecord(row)">
+                                                        <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
+                                                    </a>
+                                                </span>
+                
+                                                <span *ngIf="isEditable && row.isEditable">
+                                                    <a href="javascript:" (click)="saveRecord(row)" style="margin: 2px;">
+                                                        <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
+                                                    </a>
+                                                    <a href="javascript:" (click)="cancelRecord(row)" style="margin: 2px;">
+                                                        <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
+                                                    </a>
+                                                </span>
+                
+                                            </span>
+                                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                                                <a href="javascript:" (click)="deleteRecord(i)">
+                                                    <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
                 </div>
             </div>
         </p-tabPanel>
@@ -227,7 +289,7 @@
 
 
 
-<p-dialog [(visible)]="display" width="1000">
+<p-dialog [(visible)]="display" width="100%">
     <p-header>
         Showing Rate cards - Effective Date
         <span *ngIf="startEndDate"> {{ startEndDate[0] | date: 'MM/dd/yyyy'}} - {{ startEndDate[1] | date: 'MM/dd/yyyy'}} </span>
@@ -269,14 +331,156 @@
                                 <input type="checkbox">&nbsp;{{content}}
                             </label>
                             <span class="pull-right btn-sm btn-danger" style=" height: 24px;
-                            margin: 0px;
-                            padding: 2px;">
+                                margin: 0px;
+                                padding: 2px;">
                                 <i class="fa fa-trash-o"></i>
                             </span>
                         </li>
                     </ul>
                 </p-accordionTab>
             </p-accordion>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog [(visible)]="displayAddNewShowing" width="1200">
+    <p-header>
+        <span>New Showing - Effective Date </span>
+        <span *ngIf="startEndDate"> {{ startEndDate[0] | date: 'MM/dd/yyyy'}} - {{ startEndDate[1] | date: 'MM/dd/yyyy'}} </span>
+    </p-header>
+    <div>
+        <div class="card bg-light mt-3">
+            <div class="card-body">
+                <div class="col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="market">Market</label>
+                                    <select name="market" id="market" class="form-control">
+                                        <option value="ATL">Atlanta,GA</option>
+                                        <option value="BOS">Boston, MA</option>
+                                        <option value="NYC">New York, NY</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="description" cols="3" rows="2" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="media">Media</label>
+                                    <select name="media" id="media" class="form-control">
+                                        <option value="100">Station Domination</option>
+                                        <option value="101">Malls</option>
+                                        <option value="102">Posters</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="Coverage">Coverage</label>
+                                    <select name="Coverage" id="Coverage" class="form-control">
+                                        <option value="100">General</option>
+                                        <option value="101">Ethinic</option>
+                                        <option value="102">African-American</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="path">Path</label>
+                                    <textarea name="path" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="propsdescription">Proposal Description</label>
+                                    <textarea name="propsdescription" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="facility">Facility</label>
+                                    <select name="facility" id="facility" class="form-control">
+                                        <option value="100">Atlanta wally park airport</option>
+                                        <option value="101">Atlanta Bus Exterior</option>
+                                        <option value="102">Boston Metro Transit Rail</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="groupschedule">Group Schedule</label>
+                                    <select name="groupschedule" id="groupschedule" class="form-control">
+                                        <option value="100">Atlanta Digital Unit</option>
+                                        <option value="101">Atlanta Bus Exterior</option>
+                                        <option value="102">Boston Metro Transit Rail</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+
+                                <div *ngFor="let showings of showingsList; let i = index">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
+                                                <label *ngIf="i == 0" for="showings">Showings</label>
+                                                <select name="billingrate" class="form-control">
+                                                    <option value="1">Unit</option>
+                                                    <option value="2">100</option>
+                                                    <option value="3">75</option>
+                                                    <option value="4">50</option>
+                                                    <option value="5">25</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-3" style="padding-left: 1px; margin-left:3px;">
+                                                <div class="form-group">
+                                                    <label for="units" *ngIf="i == 0">Units</label>
+                                                    <input id="units" name="units" type="text" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-3" style="padding-left: 1px;">
+                                                <div class="input-group mb-3">
+                                                    <label for="months" *ngIf="i == 0">Weeks/Months</label>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input id="months" name="months" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div style="margin-left: -18px; " [ngStyle]="{'margin-top': i == 0 ? '30px' : '' }">
+                                                <button class="btn btn-sm btn-success" style="height: 34px;margin-top: 1px;" (click)="addControls()">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+
+                                                <button *ngIf="showingsList.length > 1" class="btn btn-sm btn-danger" style="height: 34px;margin-top: 1px;" (click)="removeControls(i)">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default">Clear All</button>
+                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-primary">Cancel</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </p-dialog>

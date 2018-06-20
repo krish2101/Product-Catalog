@@ -15,10 +15,33 @@
     height: 32px !important;
     margin-left: 10px !important;
 }
-.ui-splitbutton{
+
+.ui-splitbutton {
     margin-left: 10px !important;
 }
 
-.btn{
+.btn {
     margin: 7px;
+}
+
+.mythead {
+    font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: #555555;
+    background-color: #ebedf0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-weight: normal !important;
+    border-color: inherit;
+    box-sizing: border-box;
+    padding: .25em .5em;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.table-bordered thead th {
+    border-bottom-width: 2px !important;
+    font-weight: normal !important;
+    padding: 2px !important;
+    padding-left:10px !important;
 }

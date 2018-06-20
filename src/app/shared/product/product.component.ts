@@ -18,18 +18,26 @@ export class ProductComponent implements OnInit {
 
   items: any = [];
 
+  showingsList: any = [
+    {
+      'label': '1 Week',
+      'value': '1W',
+      'billing': ''
+    }
+  ];
+
   selectedItems: any = [];
   showProdTable: boolean = false;
   isEditable: boolean = false;
   display: boolean = false;
   isNewTableRecord: boolean = false;
+  displayAddNewShowing: boolean = false;
 
   products: any = [];
 
   constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit() {
-
     this.productService.getProducts().subscribe(result => {
       this.products = result;
     });
@@ -48,26 +56,34 @@ export class ProductComponent implements OnInit {
 
     this.rows = [
       {
-        "id": "10/Atlanta, GA/Digital Bulletins",
-        "date": "05/15/18 - 06/11/18",
+        "id": {
+          "market": "10/Atlanta, GA/Digital Bulletins",
+          "coverage": "Unit B143",
+          "type": "Regular"
+        },
+        "date": "06/15/2018 - 06/20/2018",
         // "facility": "123-456-12",
         "media": "Digital Bulletins",
         // "inventory": "10/Atlanta, GA/Digital Bulletins",
         "showingtype": "Unit",
         "units": "15",
         "duration": "1-4 weeks",
-        "netamt": "$21,000.99"
+        "netamt": "21,000.99"
       },
       {
-        "id": "20/Atlanta, GA/Digital Bulletins",
-        "date": "05/15/18 - 06/11/18",
+        "id": {
+          "market": "20/Atlanta, GA/Digital Bulletins",
+          "coverage": "Unit B143",
+          "type": "Regular"
+        },
+        "date": "05/20/2018 - 06/25/2018",
         // "facility": "123-456-12",
         "media": "Digital Bulletins",
         // "inventory": "10/Atlanta, GA/Digital Bulletins",
         "showingtype": "Unit",
         "units": "10",
         "duration": "1-4 weeks",
-        "netamt": "$10,999.00"
+        "netamt": "10,999.00"
       }
     ];
 
@@ -107,6 +123,9 @@ export class ProductComponent implements OnInit {
       }
     ]
 
+    this.rows.map(row => {
+      row.isEditable = false;
+    });
   }
   selectIndividual() {
     this.showTable();
@@ -131,32 +150,65 @@ export class ProductComponent implements OnInit {
   copyRecord(record) {
     console.log(record)
     this.isNewTableRecord = true;
-    this.newTableRecord = record;
-  }
-  editRecord() {
-    this.isEditable = true;
-  }
-  saveRecord() {
-    this.isEditable = false;
-    console.log("Save")
-  }
-  cancelRecord() {
-    this.isEditable = false;
-    console.log("Cancel")
-  }
-  deleteRecord() {
-    console.log("Delete")
+    this.newTableRecord = Object.assign({}, record);
+    // this.newTableRecord = record;
   }
 
-  createNewShowing() {
-    this.router.navigate(['/createratecard']);
-  }
-  saveChanges() {
-
+  saveChanges(product) {
+    console.log(this.newTableRecord)
+    this.rows.push(this.newTableRecord);
     this.isNewTableRecord = false;
   }
 
   cancel() {
+    this.newTableRecord = {};
     this.isNewTableRecord = false;
   }
+
+  editRecord(product) {
+    console.log(product)
+    this.isNewTableRecord = false;
+    this.isEditable = true;
+
+    this.rows.filter(row => row.isEditable).map(r => {
+      r.isEditable = false;
+      return r;
+    })
+    product.isEditable = true;
+  }
+
+  saveRecord(product) {
+    this.isEditable = false;
+    console.log(product)
+    product.isEditable = false;
+  }
+
+  cancelRecord(product) {
+    this.isEditable = false;
+    product.isEditable = false;
+  }
+
+  deleteRecord(index) {
+    console.log("Delete")
+    this.rows.splice(index, 1);
+    this.isNewTableRecord = false;
+  }
+
+  createNewShowing() {
+    // this.router.navigate(['/createratecard']);
+    this.displayAddNewShowing = true;
+  }
+
+  addControls() {
+    let dynamicBillingObj = {
+      'label': '',
+      'value': '',
+      'billing': ''
+    }
+    this.showingsList.push(dynamicBillingObj);
+  }
+  removeControls(index: number) {
+    this.showingsList.splice(index, 1);
+  }
+
 }

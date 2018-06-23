@@ -10,6 +10,101 @@ import { Router, ActivatedRoute } from '@angular/router'
 })
 export class ProductComponent implements OnInit {
 
+  marketOptions = [
+    {
+      "label": "Select Market",
+      "value": ""
+    },
+    {
+      "label": "Atlanta, GA",
+      "value": "ATL"
+    },
+    {
+      "label": "Boston, MA",
+      "value": "BOS"
+    },
+    {
+      "label": "New York, NY",
+      "value": "NYC"
+    },
+    {
+      "label": "Los Angels, CA",
+      "value": "LOS"
+    }
+  ]
+
+  rateCardTypesRows = [
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    }
+    , {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Bulletins",
+      },
+      "date": "05/20/2018",
+    }
+  ];
 
   rows: any = [];
   cols: any = [];

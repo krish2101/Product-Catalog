@@ -12,7 +12,7 @@ import { ProductComponent } from './shared/product/product.component';
 import { routes } from './app.routes';
 
 
-import { CalendarModule, TabViewModule, DataTableModule } from 'primeng/primeng';
+import { CalendarModule, TabViewModule, DataTableModule,InputSwitchModule } from 'primeng/primeng';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
@@ -33,7 +33,7 @@ import { CreateratecardComponent } from './shared/createratecard/createratecard.
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, AccordionModule,
-    CalendarModule, SplitButtonModule, DataTableModule, DialogModule, HttpModule,
+    CalendarModule, SplitButtonModule, DataTableModule, DialogModule, HttpModule,InputSwitchModule,
     FormsModule, ReactiveFormsModule, RouterModule.forRoot(routes), TableModule, TabViewModule
   ],
   providers: [],

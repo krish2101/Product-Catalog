@@ -45,3 +45,25 @@
     padding: 2px !important;
     padding-left:10px !important;
 }
+
+.ui-inputswitch {
+    display: inline-block;
+    height: 1.9em;
+    width:200px;
+}
+
+.ui-inputswitch-on{
+ font-size: 15px;
+}
+
+.ui-inputswitch-off{
+    font-size: 15px;
+}
+
+td{
+    padding: 15px !important;
+}
+
+.link{
+    color: rgb(0, 162, 255) !important;
+}

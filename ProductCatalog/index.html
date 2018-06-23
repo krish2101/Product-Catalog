@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Catalog</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/popper.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Product Catalog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav list-unstyled">
+                    <li class="nav-item navbar-nav" style="margin: 10px;">
+                        <a href="#/product" class="nav-link">Products</a>
+                    </li>
+                    <li class="nav-item navbar-nav" style="margin: 10px;">
+                        <a href="#/createratecard" class="nav-link">Create New Showing</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document" style="width: 1200px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Showing - Effective Date </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="padding:5px !important;">
+                        <div class="card bg-light mt-1">
+                            <div class="card-body" style="padding:5px !important;">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="market">Market</label>
+                                                    <select name="market" id="market" class="form-control">
+                                                        <option value="ATL">Atlanta,GA</option>
+                                                        <option value="BOS">Boston, MA</option>
+                                                        <option value="NYC">New York, NY</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="description">Description</label>
+                                                    <textarea name="description" id="description" cols="3" rows="2" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="propsdescription">Proposal Description</label>
+                                                    <textarea name="propsdescription" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="path">Path</label>
+                                                    <textarea name="path" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="media">Media</label>
+                                                    <select name="media" id="media" class="form-control">
+                                                        <option value="100">Station Domination</option>
+                                                        <option value="101">Malls</option>
+                                                        <option value="102">Posters</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="Coverage">Coverage</label>
+                                                    <select name="Coverage" id="Coverage" class="form-control">
+                                                        <option value="100">General</option>
+                                                        <option value="101">Ethinic</option>
+                                                        <option value="102">African-American</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="facility">Facility</label>
+                                                    <select name="facility" id="facility" class="form-control">
+                                                        <option value="100">Atlanta wally park airport</option>
+                                                        <option value="101">Atlanta Bus Exterior</option>
+                                                        <option value="102">Boston Metro Transit Rail</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10">
+                                                <div class="form-group">
+                                                    <label for="groupschedule">Group Schedule</label>
+                                                    <select name="groupschedule" id="groupschedule" class="form-control">
+                                                        <option value="100">Atlanta Digital Unit</option>
+                                                        <option value="101">Atlanta Bus Exterior</option>
+                                                        <option value="102">Boston Metro Transit Rail</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+
+                                                <div *ngFor="let showings of showingsList; let i = index">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
+                                                                <label *ngIf="i == 0" for="showings">Showings</label>
+                                                                <select name="billingrate" class="form-control">
+                                                                    <option value="1">Unit</option>
+                                                                    <option value="2">100</option>
+                                                                    <option value="3">75</option>
+                                                                    <option value="4">50</option>
+                                                                    <option value="5">25</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3 col-sm-3" style="padding-left: 1px; margin-left:3px;">
+                                                                <div class="form-group">
+                                                                    <label for="units" *ngIf="i == 0">Units</label>
+                                                                    <input id="units" name="units" type="text" class="form-control">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-5 col-sm-5" style="padding-left: 1px;">
+                                                                <div class="input-group mb-3">
+                                                                    <label for="months" *ngIf="i == 0">Weeks/Months</label>
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text">$</span>
+                                                                    </div>
+                                                                    <input id="months" name="months" type="text" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1 col-sm-1" style="margin-left: -18px; margin-top:30px; " [ngStyle]="{'margin-top': i == 0 ? '30px' : '' }">
+                                                                <button class="btn btn-sm btn-success" style="height: 34px;margin-top: 1px;" (click)="addControls()">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+
+                                                                <!-- <button *ngIf="showingsList.length > 1" class="btn btn-sm btn-danger" style="height: 34px;margin-top: 1px;" (click)="removeControls(i)">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="pull-right" style="float: right">
+                                    <button type="button" class="btn btn-default">Clear All</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="product">
+            <div style="border: 1px solid #777;">
+                <div style="padding-top:20px; margin-left: 20px;">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Billing">
+                                    Billing
+                                </label>
+                                <select name="Billing" id="Billing" class="form-control" style="height: 34px;">
+                                    <option value="net">Net</option>
+                                    <option value="gross">Gross</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">
+                                    Start/End Date
+                                </label>
+                                <input type="date" name="" id="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3  col-sm-3" style="margin-top: 35px;">
+                            <div class="form-group">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Select Showing</option>
+                                    <option value="">Individual Selection</option>
+                                    <option value="">Individual Selection (Quick Add)</option>
+                                    <option value="">Showings</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3  col-sm-3" style="margin-top: 35px;">
+                            <button class="btn btn-primary" style="height: 36px;" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fa fa-plus"></i> Add New Showing </button>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="" id="">
+                                    </th>
+                                    <th>Market/Media</th>
+                                    <th>Start/End Date</th>
+                                    <th>Media</th>
+                                    <th>Showing Type</th>
+                                    <th>Units</th>
+                                    <th>Duration</th>
+                                    <th>Net Amount</th>
+                                    <th>Billing Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="" id="">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            10/Atlanta, GA/Digital Bulletins
+                                        </div>
+                                        <div>
+                                            <b>Coverage:</b>Unit B143
+                                        </div>
+                                        <div class="badge badge-primary p-1" style="font-size: 15px;">
+                                            Regular
+                                        </div>
+                                    </td>
+                                    <td>
+                                        06/15/2018 - 06/20/2018
+                                    </td>
+                                    <td>
+                                        Digital Bulletins
+                                    </td>
+                                    <td>
+                                        Unit
+                                    </td>
+                                    <td>
+                                        15
+                                    </td>
+                                    <td>
+                                        1-4 weeks
+                                    </td>
+                                    <td>
+                                        $21,000.99
+                                    </td>
+
+                                    <td>
+                                        <div class="text-center">
+                                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                                                <a href="javascript:" (click)="copyRecord(row)">
+                                                    <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                                                </a>
+                                            </span>
+                                            <span style="margin: 2px;">
+                                                <span *ngIf="!row.isEditable">
+                                                    <a href="javascript:" (click)="editRecord(row)">
+                                                        <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
+                                                    </a>
+                                                </span>
+
+                                                <!-- <span *ngIf="isEditable && row.isEditable">
+                                                    <a href="javascript:" (click)="saveRecord(row)" style="margin: 2px;">
+                                                        <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
+                                                    </a>
+                                                    <a href="javascript:" (click)="cancelRecord(row)" style="margin: 2px;">
+                                                        <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
+                                                    </a>
+                                                </span> -->
+
+                                            </span>
+                                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                                                <a href="javascript:" (click)="deleteRecord(i)">
+                                                    <i class="fa fa-trash" style="background-color: red; color:white; padding: 5px;"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="" id="">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            20/Atlanta, GA/Digital Bulletins
+                                        </div>
+                                        <div>
+                                            <b>Coverage:</b>Unit B143
+                                        </div>
+                                        <div class="badge badge-primary p-1" style="font-size: 15px;">
+                                            Regular
+                                        </div>
+                                    </td>
+                                    <td>
+                                        06/15/2018 - 06/20/2018
+                                    </td>
+                                    <td>
+                                        Digital Bulletins
+                                    </td>
+                                    <td>
+                                        Unit
+                                    </td>
+                                    <td>
+                                        15
+                                    </td>
+                                    <td>
+                                        1-4 weeks
+                                    </td>
+                                    <td>
+                                        $21,000.99
+                                    </td>
+
+                                    <td>
+                                        <div class="text-center">
+                                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                                                <a href="javascript:" (click)="copyRecord(row)">
+                                                    <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
+                                                </a>
+                                            </span>
+                                            <span style="margin: 2px;">
+                                                <span *ngIf="!row.isEditable">
+                                                    <a href="javascript:" (click)="editRecord(row)">
+                                                        <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
+                                                    </a>
+                                                </span>
+
+                                                <!-- <span *ngIf="isEditable && row.isEditable">
+                                                            <a href="javascript:" (click)="saveRecord(row)" style="margin: 2px;">
+                                                                <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
+                                                            </a>
+                                                            <a href="javascript:" (click)="cancelRecord(row)" style="margin: 2px;">
+                                                                <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
+                                                            </a>
+                                                        </span> -->
+
+                                            </span>
+                                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                                                <a href="javascript:" (click)="deleteRecord(i)">
+                                                    <i class="fa fa-trash" style="background-color: red; color:white; padding: 5px;"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="createratecard">
+            <div class="card bg-light mt-3">
+                <div class="card-header">
+                    <span>New Rate Card Definition</span>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="market">Market</label>
+                                        <select name="market" id="market" class="form-control">
+                                            <option value="ATL">Atlanta,GA</option>
+                                            <option value="BOS">Boston, MA</option>
+                                            <option value="NYC">New York, NY</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea name="description" id="description" cols="3" rows="2" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="propsdescription">Proposal Description</label>
+                                        <textarea name="propsdescription" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">
+                                            Effective Date
+                                        </label>
+                                        <p-calendar showIcon="true"></p-calendar>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inventorymgmttype">Inventory Management Type</label>
+                                        <select name="inventorymgmttype" id="inventorymgmttype" class="form-control">
+                                            <option value="100">None</option>
+                                            <option value="101">Any</option>
+                                            <option value="102">Chng</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Active">Active &nbsp; </label>
+                                        <div>
+                                            <input type="radio" name="active"> Yes
+                                            <input type="radio" name="active"> No
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="productionschedule">Production Schedule</label>
+                                        <select name="productionschedule" id="productionschedule" class="form-control">
+                                            <option value="100">Atlanta Bus Exterior</option>
+                                            <option value="101">Atlanta digital posters</option>
+                                            <option value="102">Boston Metro Transit Rail</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="facility">Facility</label>
+                                        <select name="facility" id="facility" class="form-control">
+                                            <option value="100">Atlanta wally park airport</option>
+                                            <option value="101">Atlanta Bus Exterior</option>
+                                            <option value="102">Boston Metro Transit Rail</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="groupschedule">Group Schedule</label>
+                                        <select name="groupschedule" id="groupschedule" class="form-control">
+                                            <option value="100">Atlanta Digital Unit</option>
+                                            <option value="101">Atlanta Bus Exterior</option>
+                                            <option value="102">Boston Metro Transit Rail</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="billingrate">Billing Rate</label>
+                                    <div *ngFor="let billing of billingRateControls; let i = index">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
+                                                    <select name="billingrate" class="form-control">
+                                                        <option value="1">1 Week</option>
+                                                        <option value="2">2 Weeks</option>
+                                                        <option value="3">3 Weeks</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3 col-sm-3" style="padding-left: 1px;">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">$</span>
+                                                        </div>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div style="margin-left: -18px;">
+                                                    <button class="btn btn-sm btn-success" style="height: 34px;margin-top: 1px;" (click)="addControls()">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+
+                                                    <button *ngIf="billingRateControls.length > 1" class="btn btn-sm btn-danger" style="height: 34px;margin-top: 1px;" (click)="removeControls(i)">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default">Clear All</button>
+                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-primary">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</html>

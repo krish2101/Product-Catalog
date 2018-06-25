@@ -51,58 +51,72 @@ export class ProductComponent implements OnInit {
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Digital Bulletins (Individual Units)",
       },
-      "date": "05/20/2018",
+      "date": "01/22/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Digital Poster Rates (Individual Units)",
       },
-      "date": "05/20/2018",
+      "date": "01/22/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Digital Poster Rates (Showings)",
       },
-      "date": "05/20/2018",
+      "date": "01/22/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Bus Rates - Interior",
       },
-      "date": "05/20/2018",
+      "date": "01/22/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Junior Poster Rates - Individual Units",
       },
-      "date": "05/20/2018",
+      "date": "01/22/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Poster Rates - Ethinic Showings",
       },
-      "date": "05/20/2018",
+      "date": "01/22/2016",
     }
     , {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins Individual",
+        "description": " Sation Saturation",
       },
-      "date": "05/20/2016",
+      "date": "01/22/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Bus Exterior Showings",
+        "description": " Shelter Rates - Individual Units",
       },
-      "date": "05/20/2017",
+      "date": "01/21/2016",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Shelter Rates - Showings",
+      },
+      "date": "01/21/2016",
+    },
+    {
+      "id": {
+        "market": "Atlanta, GA",
+        "description": " Digital Shelter Rates - Showings",
+      },
+      "date": "01/21/2016",
     }
   ];
 

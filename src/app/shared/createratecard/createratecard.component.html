@@ -1,124 +1,110 @@
 <div class="card bg-light mt-3">
     <div class="card-header">
-        <span>New Rate Card Definition</span>
+        <b> New Rate Card Definition</b>
     </div>
     <div class="card-body">
         <div class="col-md-12 col-sm-12">
             <div class="row">
                 <div class="col-md-6 col-sm-6">
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="effeectiveDate">Effective Date</label>
+                            <br>
+                            <p-calendar [(ngModel)]="createRateCardData.date" showIcon="true"></p-calendar>
+                        </div>
+                    </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label for="market">Market</label>
-                            <select name="market" id="market" class="form-control">
-                                <option value="ATL">Atlanta,GA</option>
-                                <option value="BOS">Boston, MA</option>
-                                <option value="NYC">New York, NY</option>
+                            <select name="market" id="market" class="form-control" [(ngModel)]="createRateCardData.id.market">
+                                <option value="Atlanta, GA">Atlanta,GA</option>
+                                <option value="Boston, MA">Boston, MA</option>
+                                <option value="New York, NY">New York, NY</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" id="description" cols="3" rows="2" class="form-control"></textarea>
+                            <textarea name="description" id="description" cols="3" rows="2" class="form-control" [(ngModel)]="createRateCardData.id.description"></textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label for="propsdescription">Proposal Description</label>
-                            <textarea name="propsdescription" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                            <label for="propdesc">Propoasl Description</label>
+                            <textarea name="propdesc" id="propdesc" cols="3" rows="2" class="form-control" [(ngModel)]="createRateCardData.propsDescr"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="spaceMisc">Space / Miscellinious</label>
+                            <br>
+                            <input type="radio" id="spaceMisc" [(ngModel)]="createRateCardData.spaceMisc" value="Space">Space
+                            <input type="radio" id="spaceMisc" [(ngModel)]="createRateCardData.spaceMisc" value="Miscellinious">Miscellinious
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label for="">
-                                Effective Date
-                            </label>
-                            <p-calendar showIcon="true"></p-calendar>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="inventorymgmttype">Inventory Management Type</label>
-                            <select name="inventorymgmttype" id="inventorymgmttype" class="form-control">
-                                <option value="100">None</option>
-                                <option value="101">Any</option>
-                                <option value="102">Chng</option>
+                            <label for="prodsched">Production Schedule</label>
+                            <select name="prodsched" id="prodsched" class="form-control" [(ngModel)]="createRateCardData.prodSched">
+                                <option value="Digital Bulletins Facility">Digital Bulletins Facility</option>
+                                <option value="Airport Shuttle">Airport Shuttle</option>
+                                <option value="Test">Test</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="active">Active</label> &nbsp; &nbsp;
+                            <input type="radio" name="active" id="active" [(ngModel)]="createRateCardData.active" [value]="true"> True
+                            <input type="radio" name="active" id="active" [(ngModel)]="createRateCardData.active" [value]="false"> False
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label for="Active">Active &nbsp; </label>
-                            <div>
-                                <input type="radio" name="active"> Yes
-                                <input type="radio" name="active"> No
-                            </div>
+                            <label for="invtMngmtType">Inventory Management Type</label>
+                            <select name="invtMngmtType" id="invtMngmtType" class="form-control" [(ngModel)]="createRateCardData.invtMngmtType">
+                                <option value="Showings">Showings</option>
+                                <option value="Individual Unit">Individual Unit</option>
+                                <option value="None">None</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label for="productionschedule">Production Schedule</label>
-                            <select name="productionschedule" id="productionschedule" class="form-control">
-                                <option value="100">Atlanta Bus Exterior</option>
-                                <option value="101">Atlanta digital posters</option>
-                                <option value="102">Boston Metro Transit Rail</option>
+                            <label for="billingRate">Billing Rate</label>
+                            <select name="billingRate" id="billingRate" class="form-control" [(ngModel)]="createRateCardData.billingRate">
+                                <option value="4 Weeks">4 Weeks</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Weekly">Weekly</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="facility">Facility</label>
-                            <select name="facility" id="facility" class="form-control">
-                                <option value="100">Atlanta wally park airport</option>
-                                <option value="101">Atlanta Bus Exterior</option>
-                                <option value="102">Boston Metro Transit Rail</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="groupschedule">Group Schedule</label>
-                            <select name="groupschedule" id="groupschedule" class="form-control">
-                                <option value="100">Atlanta Digital Unit</option>
-                                <option value="101">Atlanta Bus Exterior</option>
-                                <option value="102">Boston Metro Transit Rail</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-md-12 col-sm-12">
-                        <label for="billingrate">Billing Rate</label>
-                        <div *ngFor="let billing of billingRateControls; let i = index">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
-                                    <select name="billingrate" class="form-control">
-                                        <option value="1">1 Week</option>
-                                        <option value="2">2 Weeks</option>
-                                        <option value="3">3 Weeks</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3" style="padding-left: 1px;">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
+                        <label for="">Billing Period</label>
+                        <div *ngFor="let bp of [0,1,2,3,4]; let i = index">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
+                                        <select name="bfrom" class="form-control">
+                                            <option value="{{createRateCardData?.billingPeriod?.from[i]?.value}}">{{createRateCardData?.billingPeriod?.from[i]?.label}}</option>
+                                        </select>
+                                    </div>
+                                    <span style="padding: 10px;">to</span>
+                                    <div class="col-md-3 col-sm-3" style="padding-left: 1px; margin-left:3px;">
+                                        <div class="form-group">
+                                            <select name="bto" class="form-control">
+                                                <option value="{{createRateCardData?.billingPeriod?.to[i]?.value}}">{{createRateCardData?.billingPeriod?.to[i]?.label}}</option>
+                                            </select>
                                         </div>
-                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
-                                <div style="margin-left: -18px;">
-                                    <button class="btn btn-sm btn-success" style="height: 34px;margin-top: 1px;" (click)="addControls()">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-
-                                    <button *ngIf="billingRateControls.length > 1" class="btn btn-sm btn-danger" style="height: 34px;margin-top: 1px;" (click)="removeControls(i)">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -128,9 +114,218 @@
     <div class="card-footer">
         <div class="pull-right">
             <button type="button" class="btn btn-default">Clear All</button>
-            <button type="button" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-primary">Cancel</button>
+            <button type="button" class="btn btn-success" (click)="createShowings()">Create</button>
+            <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
         </div>
-
     </div>
 </div>
+
+<p-dialog [(visible)]="displayShowingsDialog" width="1200" [minHeight]="600">
+    <p-header>
+        {{ createRateCardData?.id?.market}} Showings
+        <span *ngIf=" createRateCardData?.date"> - Effective Date {{ createRateCardData?.date | date: 'MM/dd/yyyy'}}</span>
+    </p-header>
+    <div>
+        <div class="form-group">
+            <div class="row col-md-12 col-sm-12">
+                <!-- <div class="col-md-3 col-sm-3">
+                    <label for="filter">Filter</label>
+                    <input type="text" class="form-control" id="filter">
+                </div> -->
+                <button type="button" class="btn btn-success" (click)="addNewShowings()">Add New Showings</button>
+            </div>
+        </div>
+        <div *ngIf="displayAddNewShowings" style="margin: 5px 42px 5px  17px">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row col-md-12 col-sm-12">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Facility">Facility</label>
+                                        <select name="Facility" id="Facility" class="form-control">
+                                            <option value="atlanta">Atlanta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="subFacility">Sub Facility</label>
+                                        <select name="subFacility" id="subFacility" class="form-control">
+                                            <option value="atlanta">Atlanta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="groupSched">Group Schedule</label>
+                                        <select name="groupSched" id="groupSched" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Media">Media</label>
+                                        <select name="Media" id="Media" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="createRateCardData?.invtMngmtType == 'Individual Unit'" class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="InvntMgmtMedia">Inventory Management Media</label>
+                                        <select name="InvntMgmtMedia" id="InvntMgmtMedia" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="MediaGroup">Media Group</label>
+                                        <select name="MediaGroup" id="MediaGroup" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Coverage">Coverage</label>
+                                        <select name="Coverage" id="Coverage" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Path">Path</label>
+                                        <textarea name="Path" id="Path" cols="3" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label for="Attachements">Attachements</label>
+                                <p-fileUpload name="demo[]" url="" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
+                                    <ng-template pTemplate="content">
+                                        <ul *ngIf="uploadedFiles.length">
+                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                        </ul>
+                                    </ng-template>
+                                </p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <p-dataTable [value]="rateCardTypesRows" [immutable]="false" [rowsPerPageOptions]="[5,10,20]">
+                                <p-column field="showings" header="Showings">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div>
+                                            <select [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="units" header="Units">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="1-4Weeks" header="1-4 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="5-12Weeks" header="5-12 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="13-25Weeks" header="13-25 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="26-41Weeks" header="26-41 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="52Weeks" header="52 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default">Clear All</button>
+                        <button type="button" class="btn btn-success" (click)="saveShowings()">Save</button>
+                        <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</p-dialog>

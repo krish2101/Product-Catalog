@@ -37,16 +37,16 @@ export class ProductComponent implements OnInit {
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": "Airport Shuttles",
       },
-      "date": "05/20/2018",
+      "date": "05/24/2018",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Digital Bulletins (Showings)",
       },
-      "date": "05/20/2018",
+      "date": "03/11/2016",
     },
     {
       "id": {
@@ -93,16 +93,16 @@ export class ProductComponent implements OnInit {
     , {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Digital Bulletins Individual",
       },
-      "date": "05/20/2018",
+      "date": "05/20/2016",
     },
     {
       "id": {
         "market": "Atlanta, GA",
-        "description": " Digital Bulletins",
+        "description": " Bus Exterior Showings",
       },
-      "date": "05/20/2018",
+      "date": "05/20/2017",
     }
   ];
 
@@ -110,6 +110,8 @@ export class ProductComponent implements OnInit {
   cols: any = [];
   mediaTypes: any = [];
   newTableRecord: any = {};
+  isCopy: boolean = false;
+  isEdit: boolean = false;
 
   items: any = [];
 
@@ -126,9 +128,26 @@ export class ProductComponent implements OnInit {
   isEditable: boolean = false;
   display: boolean = false;
   isNewTableRecord: boolean = false;
-  displayAddNewShowing: boolean = false;
+  editProduct: boolean = false;
 
   products: any = [];
+  editProductData = {
+    "id": {
+      "market": "",
+      "description": "",
+    },
+    "date": "",
+    "propsDescr": "",
+    "active": true,
+    "prodSched": "",
+    "spaceMisc": "",
+    "billingRate": "",
+    "invtMngmtType": "",
+    "billingPeriod": {
+      "from": [],
+      "to": []
+    }
+  };
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -242,11 +261,72 @@ export class ProductComponent implements OnInit {
     this.display = true;
   }
 
-  copyRecord(record) {
-    console.log(record)
-    this.isNewTableRecord = true;
-    this.newTableRecord = Object.assign({}, record);
-    // this.newTableRecord = record;
+  copyRecord(product) {
+    // this.newTableRecord = Object.assign({}, record);
+    this.editProductData = product;
+    this.editProductData = {
+      "id": {
+        "market": product.id.market,
+        "description": product.id.description,
+      },
+      "date": product.date,
+      "propsDescr": "Atlanta,GA Digital Bulletin Rate Showings",
+      "prodSched": "Test",
+      "active": false,
+      "spaceMisc": "Space",
+      "billingRate": "Weekly",
+      "invtMngmtType": "None",
+      "billingPeriod": {
+        "from": [
+          {
+            "label": "1",
+            "value": "1"
+          },
+          {
+            "label": "5",
+            "value": "5"
+          },
+          {
+            "label": "26",
+            "value": "26"
+          },
+          {
+            "label": "41",
+            "value": "41"
+          },
+          {
+            "label": "",
+            "value": ""
+          }
+        ],
+        "to": [
+          {
+            "label": "4",
+            "value": "4"
+          },
+          {
+            "label": "25",
+            "value": "25"
+          },
+          {
+            "label": "40",
+            "value": "40"
+          },
+          {
+            "label": "52",
+            "value": "52"
+          },
+          {
+            "label": "",
+            "value": ""
+          }
+        ]
+      }
+    }
+    console.log(this.editProductData)
+    this.editProduct = true;
+    this.isCopy = true;
+    this.isEdit = false;
   }
 
   saveChanges(product) {
@@ -256,20 +336,74 @@ export class ProductComponent implements OnInit {
   }
 
   cancel() {
-    this.newTableRecord = {};
-    this.isNewTableRecord = false;
+    this.editProduct = false;
   }
 
   editRecord(product) {
-    console.log(product)
-    this.isNewTableRecord = false;
-    this.isEditable = true;
-
-    this.rows.filter(row => row.isEditable).map(r => {
-      r.isEditable = false;
-      return r;
-    })
-    product.isEditable = true;
+    this.editProductData = product;
+    this.editProductData = {
+      "id": {
+        "market": product.id.market,
+        "description": product.id.description,
+      },
+      "date": product.date,
+      "propsDescr": "Atlanta,GA Digital Bulletin Rate Showings",
+      "prodSched": "Test",
+      "active": false,
+      "spaceMisc": "Space",
+      "billingRate": "Weekly",
+      "invtMngmtType": "None",
+      "billingPeriod": {
+        "from": [
+          {
+            "label": "1",
+            "value": "1"
+          },
+          {
+            "label": "5",
+            "value": "5"
+          },
+          {
+            "label": "26",
+            "value": "26"
+          },
+          {
+            "label": "41",
+            "value": "41"
+          },
+          {
+            "label": "",
+            "value": ""
+          }
+        ],
+        "to": [
+          {
+            "label": "4",
+            "value": "4"
+          },
+          {
+            "label": "25",
+            "value": "25"
+          },
+          {
+            "label": "40",
+            "value": "40"
+          },
+          {
+            "label": "52",
+            "value": "52"
+          },
+          {
+            "label": "",
+            "value": ""
+          }
+        ]
+      }
+    }
+    console.log(this.editProductData)
+    this.editProduct = true;
+    this.isEdit = true;
+    this.isCopy = false;
   }
 
   saveRecord(product) {
@@ -291,7 +425,7 @@ export class ProductComponent implements OnInit {
 
   createNewShowing() {
     // this.router.navigate(['/createratecard']);
-    this.displayAddNewShowing = true;
+    // this.editProduct = true;
   }
 
   addControls() {

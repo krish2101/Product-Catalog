@@ -36,7 +36,7 @@
                             Filter
                         </label>
                         <div class="input-group" style="height: 33px;">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" #prodfilter>
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i class="fa fa-filter"></i>
@@ -48,8 +48,8 @@
             </div>
 
 
-            <p-dataTable [value]="rateCardTypesRows" [immutable]="false"
-            [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+            <p-dataTable [value]="rateCardTypesRows" [immutable]="false" [globalFilter]="prodfilter" [rows]="5" [paginator]="true" [pageLinks]="3"
+                [rowsPerPageOptions]="[5,10,20]">
                 <p-column field="id" header="Market/Description" [style]="{'width':'40%'}">
                     <ng-template let-row="rowData" pTemplate="body">
                         <div>
@@ -57,6 +57,13 @@
                         </div>
                     </ng-template>
                 </p-column>
+
+                <p-column field="id.market" header="" [style]="{'width':'40%'}" [hidden]="true">
+                </p-column>
+
+                <p-column field="id.description" header="" [style]="{'width':'40%'}" [hidden]="true">
+                </p-column>
+
                 <p-column field="date" header="Effective Date" [style]="{'width':'15%','text-align':'center'}">
                     <ng-template let-row="rowData" pTemplate="body">
                         <div>
@@ -69,34 +76,24 @@
                     </ng-template>
                     <ng-template let-row="rowData" pTemplate="body" let-i="rowIndex">
                         <div class="text-center">
-                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                            <span style="margin: 2px;">
                                 <a href="javascript:" (click)="copyRecord(row)">
                                     <i class="fa fa-clipboard" style="background-color: rgb(68, 14, 68); color:white; padding:5px;"></i>
                                 </a>
                             </span>
                             <span style="margin: 2px;">
-                                <span *ngIf="!row.isEditable">
+                                <span>
                                     <a href="javascript:" (click)="editRecord(row)">
                                         <i class="fa fa-edit" style="background-color: green; color:white; padding:5px;"></i>
                                     </a>
                                 </span>
-
-                                <span *ngIf="isEditable && row.isEditable">
-                                    <a href="javascript:" (click)="saveRecord(row)" style="margin: 2px;">
-                                        <i class="fa fa-save" style="background-color: green; color:white; padding:5px;"></i>
-                                    </a>
-                                    <a href="javascript:" (click)="cancelRecord(row)" style="margin: 2px;">
-                                        <i class="fa fa-remove" style="background-color: #777; color:white; padding:5px;"></i>
-                                    </a>
-                                </span>
-
                             </span>
-                            <span style="margin: 2px;" *ngIf="!row.isEditable">
-                                    <a href="javascript:" (click)="printRecord(i)">
-                                        <i class="fa fa-print" style="background-color: black; color:white; padding: 5px;"></i>
-                                    </a>
-                                </span>
-                            <span style="margin: 2px;" *ngIf="!row.isEditable">
+                            <span style="margin: 2px;">
+                                <a href="javascript:" (click)="printRecord(i)">
+                                    <i class="fa fa-print" style="background-color: black; color:white; padding: 5px;"></i>
+                                </a>
+                            </span>
+                            <span style="margin: 2px;">
                                 <a href="javascript:" (click)="deleteRecord(i)">
                                     <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
                                 </a>
@@ -395,8 +392,8 @@
                                 <input type="checkbox">&nbsp;{{content}}
                             </label>
                             <span class="pull-right btn-sm btn-danger" style=" height: 24px;
-                                margin: 0px;
-                                padding: 2px;">
+                                    margin: 0px;
+                                    padding: 2px;">
                                 <i class="fa fa-trash-o"></i>
                             </span>
                         </li>
@@ -407,23 +404,30 @@
     </div>
 </p-dialog>
 
-<p-dialog [(visible)]="displayAddNewShowing" width="1200">
+<p-dialog [(visible)]="editProduct" width="1400">
     <p-header>
-        <span>New Showing - Effective Date </span>
-        <span *ngIf="startEndDate"> {{ startEndDate[0] | date: 'MM/dd/yyyy'}} - {{ startEndDate[1] | date: 'MM/dd/yyyy'}} </span>
+        <span>{{ editProductData?.id?.market }} - {{ editProductData?.id?.description }} - Effective Date </span>
+        <span *ngIf="editProductData?.date"> {{ editProductData?.date | date: 'MM/dd/yyyy'}} </span>
     </p-header>
     <div>
         <div class="card bg-light mt-3">
-            <div class="card-body">
+            <div class="card-body" *ngIf="editProductData">
                 <div class="col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
+
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="effeectiveDate">Effective Date</label>
+                                    <p-calendar [(ngModel)]="editProductData.date" showIcon="true"></p-calendar>
+                                </div>
+                            </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="market">Market</label>
-                                    <select name="market" id="market" class="form-control">
-                                        <option value="ATL">Atlanta,GA</option>
-                                        <option value="BOS">Boston, MA</option>
+                                    <select name="market" id="market" class="form-control" [(ngModel)]="editProductData.id.market">
+                                        <option value="Atlanta, GA">Atlanta,GA</option>
+                                        <option value="Boston,MA">Boston, MA</option>
                                         <option value="NYC">New York, NY</option>
                                     </select>
                                 </div>
@@ -431,103 +435,81 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea name="description" id="description" cols="3" rows="2" class="form-control"></textarea>
+                                    <textarea name="description" id="description" cols="3" rows="2" class="form-control" [(ngModel)]="editProductData.id.description"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="media">Media</label>
-                                    <select name="media" id="media" class="form-control">
-                                        <option value="100">Station Domination</option>
-                                        <option value="101">Malls</option>
-                                        <option value="102">Posters</option>
+                                    <label for="propdesc">Propoasl Description</label>
+                                    <textarea name="propdesc" id="propdesc" cols="3" rows="2" class="form-control" [(ngModel)]="editProductData.propsDescr"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="spaceMisc">Space / Miscellinious</label>
+                                    <br>
+                                    <input type="radio" id="spaceMisc" [(ngModel)]="editProductData.spaceMisc" value="Space">Space
+                                    <input type="radio" id="spaceMisc" [(ngModel)]="editProductData.spaceMisc" value="Miscellinious">Miscellinious
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="prodsched">Production Schedule</label>
+                                    <select name="prodsched" id="prodsched" class="form-control" [(ngModel)]="editProductData.prodSched">
+                                        <option value="Digital Bulletins Facility">Digital Bulletins Facility</option>
+                                        <option value="Airport Shuttle">Airport Shuttle</option>
+                                        <option value="Test">Test</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="Coverage">Coverage</label>
-                                    <select name="Coverage" id="Coverage" class="form-control">
-                                        <option value="100">General</option>
-                                        <option value="101">Ethinic</option>
-                                        <option value="102">African-American</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label for="path">Path</label>
-                                    <textarea name="path" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label for="propsdescription">Proposal Description</label>
-                                    <textarea name="propsdescription" id="propsdescription" cols="3" rows="2" class="form-control"></textarea>
+                                    <label for="active">Active</label> &nbsp; &nbsp;
+                                    <input type="radio" name="active" id="active" [(ngModel)]="editProductData.active" [value]="true"> True
+                                    <input type="radio" name="active" id="active" [(ngModel)]="editProductData.active" [value]="false"> False
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="facility">Facility</label>
-                                    <select name="facility" id="facility" class="form-control">
-                                        <option value="100">Atlanta wally park airport</option>
-                                        <option value="101">Atlanta Bus Exterior</option>
-                                        <option value="102">Boston Metro Transit Rail</option>
+                                    <label for="invtMngmtType">Inventory Management Type</label>
+                                    <select name="invtMngmtType" id="invtMngmtType" class="form-control" [(ngModel)]="editProductData.invtMngmtType">
+                                        <option value="Digital Bulletins Facility">Digital Bulletins Facility</option>
+                                        <option value="Airport Shuttle">Airport Shuttle</option>
+                                        <option value="None">None</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="groupschedule">Group Schedule</label>
-                                    <select name="groupschedule" id="groupschedule" class="form-control">
-                                        <option value="100">Atlanta Digital Unit</option>
-                                        <option value="101">Atlanta Bus Exterior</option>
-                                        <option value="102">Boston Metro Transit Rail</option>
+                                    <label for="billingRate">Billing Rate</label>
+                                    <select name="billingRate" id="billingRate" class="form-control" [(ngModel)]="editProductData.billingRate">
+                                        <option value="4 Weeks">4 Weeks</option>
+                                        <option value="Monthly">Monthly</option>
+                                        <option value="Weekly">Weekly</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-sm-12">
 
-                                <div *ngFor="let showings of showingsList; let i = index">
+                            <div class="col-md-12 col-sm-12">
+                                <label for="">Billing Period</label>
+                                <div *ngFor="let bp of [0,1,2,3,4]; let i = index">
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-3 col-sm-3" style="padding-right: 1px;">
-                                                <label *ngIf="i == 0" for="showings">Showings</label>
-                                                <select name="billingrate" class="form-control">
-                                                    <option value="1">Unit</option>
-                                                    <option value="2">100</option>
-                                                    <option value="3">75</option>
-                                                    <option value="4">50</option>
-                                                    <option value="5">25</option>
+                                                <select name="bfrom" class="form-control">
+                                                    <option value="{{editProductData?.billingPeriod?.from[i]?.value}}">{{editProductData?.billingPeriod?.from[i]?.label}}</option>
                                                 </select>
                                             </div>
-
+                                            <span style="padding: 10px;">to</span>
                                             <div class="col-md-3 col-sm-3" style="padding-left: 1px; margin-left:3px;">
                                                 <div class="form-group">
-                                                    <label for="units" *ngIf="i == 0">Units</label>
-                                                    <input id="units" name="units" type="text" class="form-control">
+                                                    <select name="bto" class="form-control">
+                                                        <option value="{{editProductData?.billingPeriod?.to[i]?.value}}">{{editProductData?.billingPeriod?.to[i]?.label}}</option>
+                                                    </select>
                                                 </div>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-3" style="padding-left: 1px;">
-                                                <div class="input-group mb-3">
-                                                    <label for="months" *ngIf="i == 0">Weeks/Months</label>
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                    <input id="months" name="months" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div style="margin-left: -18px; " [ngStyle]="{'margin-top': i == 0 ? '30px' : '' }">
-                                                <button class="btn btn-sm btn-success" style="height: 34px;margin-top: 1px;" (click)="addControls()">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-
-                                                <button *ngIf="showingsList.length > 1" class="btn btn-sm btn-danger" style="height: 34px;margin-top: 1px;" (click)="removeControls(i)">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -540,8 +522,14 @@
             <div class="card-footer">
                 <div class="pull-right">
                     <button type="button" class="btn btn-default">Clear All</button>
-                    <button type="button" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-primary">Cancel</button>
+                    <span *ngIf="isEdit">
+                        <button type="button" class="btn btn-success">Save</button>
+                    </span>
+                    <span *ngIf="isCopy">
+                        <button type="button" class="btn btn-success">Create</button>
+                    </span>
+
+                    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
                 </div>
 
             </div>

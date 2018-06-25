@@ -60,9 +60,10 @@
     font-size: 15px;
 }
 
-td{
+.ui-datatable .ui-datatable-thead>tr>th, .ui-datatable .ui-datatable-tfoot>tr>td, .ui-datatable .ui-datatable-data>tr>td {
     padding: 15px !important;
 }
+
 
 .link{
     color: rgb(0, 162, 255) !important;

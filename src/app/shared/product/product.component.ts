@@ -10,6 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router'
 })
 export class ProductComponent implements OnInit {
 
+  displayShowingsDialog: boolean = false;
+  displayAddNewShowings: boolean = false;
+
   marketOptions = [
     {
       "label": "Select Market",
@@ -119,6 +122,61 @@ export class ProductComponent implements OnInit {
       "date": "01/21/2016",
     }
   ];
+  newRateCardTypesRows = [
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    }
+  ];
+
+  productShowingsList = [
+    "King size Bus Posters - Bus Rates African American",
+    "Taillight Bus Displays",
+    "Bus Posters - Ethinic",
+    "Digital Poster Showing",
+    "Digital Junior Posters"
+  ]
 
   rows: any = [];
   cols: any = [];
@@ -143,6 +201,7 @@ export class ProductComponent implements OnInit {
   display: boolean = false;
   isNewTableRecord: boolean = false;
   editProduct: boolean = false;
+  editShowings: any = {};
 
   products: any = [];
   editProductData = {
@@ -343,6 +402,9 @@ export class ProductComponent implements OnInit {
     this.isEdit = false;
   }
 
+
+
+
   saveChanges(product) {
     console.log(this.newTableRecord)
     this.rows.push(this.newTableRecord);
@@ -437,9 +499,14 @@ export class ProductComponent implements OnInit {
     this.isNewTableRecord = false;
   }
 
-  createNewShowing() {
-    // this.router.navigate(['/createratecard']);
-    // this.editProduct = true;
+  createNewShowings(showing) {
+    this.displayShowingsDialog = true;
+    this.editShowings = showing;
+    console.log(this.editShowings);
+  }
+
+  addNewShowings() {
+    this.displayAddNewShowings = true;
   }
 
   addControls() {
@@ -452,6 +519,27 @@ export class ProductComponent implements OnInit {
   }
   removeControls(index: number) {
     this.showingsList.splice(index, 1);
+  }
+
+  msgs: any[];
+
+  uploadedFiles: any[] = [];
+
+  onUpload(event) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+
+    this.msgs = [];
+    this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
+  }
+
+  cancelShwoings() {
+    this.displayAddNewShowings = false;
+  }
+
+  deleteProductFromList(i) {
+
   }
 
 }

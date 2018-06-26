@@ -53,7 +53,7 @@
                 <p-column field="id" header="Market/Description" [style]="{'width':'40%'}">
                     <ng-template let-row="rowData" pTemplate="body">
                         <div>
-                            <a href="javascript:" class="link">{{row.id.market }} - {{row.id.description }}</a>
+                            <a href="javascript:" class="link" (click)="createNewShowings(row)">{{row.id.market }} - {{row.id.description }}</a>
                         </div>
                     </ng-template>
                 </p-column>
@@ -532,6 +532,237 @@
                     <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+
+
+<p-dialog [(visible)]="displayShowingsDialog" width="1200" [minHeight]="600" modal="true" responsive="true">
+    <p-header>
+        {{ editShowings?.id?.market}} Showings
+        <span *ngIf=" editShowings?.date"> - Effective Date {{ editShowings?.date | date: 'MM/dd/yyyy'}}</span>
+    </p-header>
+    <div>
+        <div class="form-group">
+            <div class="row col-md-12 col-sm-12">
+                <!-- <div class="col-md-3 col-sm-3">
+                        <label for="filter">Filter</label>
+                        <input type="text" class="form-control" id="filter">
+                    </div> -->
+                <button type="button" class="btn btn-success" (click)="addNewShowings()">Add New Showings</button>
+            </div>
+        </div>
+        <div *ngIf="displayAddNewShowings" style="margin: 5px 42px 5px  17px">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row col-md-12 col-sm-12">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Facility">Facility</label>
+                                        <select name="Facility" id="Facility" class="form-control">
+                                            <option value="atlanta">Atlanta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="subFacility">Sub Facility</label>
+                                        <select name="subFacility" id="subFacility" class="form-control">
+                                            <option value="atlanta">Atlanta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="groupSched">Group Schedule</label>
+                                        <select name="groupSched" id="groupSched" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Media">Media</label>
+                                        <select name="Media" id="Media" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="createRateCardData?.invtMngmtType == 'Individual Unit'" class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="InvntMgmtMedia">Inventory Management Media</label>
+                                        <select name="InvntMgmtMedia" id="InvntMgmtMedia" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="MediaGroup">Media Group</label>
+                                        <select name="MediaGroup" id="MediaGroup" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Coverage">Coverage</label>
+                                        <select name="Coverage" id="Coverage" class="form-control">
+                                            <option value="active">Active</option>
+                                            <option value="inactive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="Path">Path</label>
+                                        <textarea name="Path" id="Path" cols="3" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label for="Attachements">Attachements</label>
+                                <p-fileUpload name="demo[]" url="" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
+                                    <ng-template pTemplate="content">
+                                        <ul *ngIf="uploadedFiles.length">
+                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                        </ul>
+                                    </ng-template>
+                                </p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <p-dataTable [value]="newRateCardTypesRows" [immutable]="false" [rowsPerPageOptions]="[5,10,20]">
+                                <p-column field="showings" header="Showings">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div>
+                                            <select [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="units" header="Units">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="1-4Weeks" header="1-4 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="5-12Weeks" header="5-12 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="13-25Weeks" header="13-25 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="26-41Weeks" header="26-41 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="52Weeks" header="52 Weeks">
+                                    <ng-template let-col let-row="rowData" pTemplate="body">
+                                        <div class="input-group" style="height: 33px;">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-dollar"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default">Clear All</button>
+                        <button type="button" class="btn btn-success" (click)="saveShowings()">Save</button>
+                        <button type="button" class="btn btn-primary" (click)="cancelShwoings()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin: 5px 42px 5px  17px">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div *ngFor="let prodlist of productShowingsList; let i = index">
+                        <div>
+                            <label>
+                                <input type="checkbox"> &nbsp; {{ prodlist }}
+                            </label>
+                            <span class="pull-right">
+                                <a href="javascript:" (click)="deleteProductFromList(i)">
+                                    <i class="fa fa-trash-o" style="background-color: red; color:white; padding: 5px;"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

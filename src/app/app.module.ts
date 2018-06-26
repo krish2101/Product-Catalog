@@ -12,7 +12,9 @@ import { ProductComponent } from './shared/product/product.component';
 import { routes } from './app.routes';
 
 
-import { CalendarModule, TabViewModule, DataTableModule,InputSwitchModule,FileUploadModule } from 'primeng/primeng';
+import { CalendarModule, TabViewModule, DataTableModule,InputSwitchModule,FileUploadModule ,
+         PanelModule
+       } from 'primeng/primeng';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
@@ -20,6 +22,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { HomeComponent } from './shared/home/home.component';
 import { ChildComponent } from './child/child.component';
 import { CreateratecardComponent } from './shared/createratecard/createratecard.component';
+import { ShowingsComponent } from './shared/showings/showings.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,10 @@ import { CreateratecardComponent } from './shared/createratecard/createratecard.
     HomeComponent,
     ChildComponent,
     CreateratecardComponent,
+    ShowingsComponent,
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, AccordionModule,
+    BrowserModule, BrowserAnimationsModule, AccordionModule,PanelModule,
     CalendarModule, SplitButtonModule, DataTableModule, DialogModule, HttpModule,InputSwitchModule,FileUploadModule,
     FormsModule, ReactiveFormsModule, RouterModule.forRoot(routes), TableModule, TabViewModule
   ],

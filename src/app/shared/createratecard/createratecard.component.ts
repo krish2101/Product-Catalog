@@ -151,4 +151,13 @@ export class CreateratecardComponent implements OnInit {
     this.msgs.push({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
 
+
+  hideDialog(event){
+   console.log(event)
+  }
+
+  cancel(){
+    this.displayAddNewShowings = false;
+  }
+
 }

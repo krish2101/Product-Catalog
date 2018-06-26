@@ -120,7 +120,7 @@
     </div>
 </div>
 
-<p-dialog [(visible)]="displayShowingsDialog" width="1200" [minHeight]="600">
+<p-dialog [(visible)]="displayShowingsDialog" width="1200" [minHeight]="600" modal="true">
     <p-header>
         {{ createRateCardData?.id?.market}} Showings
         <span *ngIf=" createRateCardData?.date"> - Effective Date {{ createRateCardData?.date | date: 'MM/dd/yyyy'}}</span>

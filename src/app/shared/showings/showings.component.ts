@@ -13,6 +13,7 @@ export class ShowingsComponent implements OnInit {
   cols: any = [];
   mediaTypes: any = [];
   newTableRecord: any = {};
+  displayShowingsDialog: boolean = false;
 
   items: any = [];
 
@@ -24,6 +25,8 @@ export class ShowingsComponent implements OnInit {
     }
   ];
 
+  selectedRow = {};
+
   selectedItems: any = [];
   showProdTable: boolean = false;
   isEditable: boolean = false;
@@ -34,6 +37,54 @@ export class ShowingsComponent implements OnInit {
   products: any = [];
 
   constructor(private productService: ProductService, private router: Router) { }
+
+  newRateCardTypesRows = [
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    },
+    {
+      "showings": "",
+      "units": "",
+      "1-4Weeks": "",
+      "5-12Weeks": "",
+      "13-25Weeks": "",
+      "26-41Weeks": "",
+      "52Weeks": ""
+    }
+  ];
 
   ngOnInit() {
     this.productService.getProducts().subscribe(result => {
@@ -55,9 +106,11 @@ export class ShowingsComponent implements OnInit {
     this.rows = [
       {
         "id": {
-          "market": "10/Atlanta, GA/Digital Bulletins",
+          "seqno": "10",
+          "market": "Atlanta, GA",
+          "description": "Digital Bulletins",
           "coverage": "Unit B143",
-          "type": "Regular"
+          "path": "oms.outfrontmedia.com",
         },
         "date": "06/15/2018",
         // "facility": "123-456-12",
@@ -66,13 +119,16 @@ export class ShowingsComponent implements OnInit {
         "showingtype": "Unit",
         "units": "15",
         "duration": "1-4 weeks",
-        "netamt": "21,000.99"
+        "netamt": "21,000.99",
+        "invtMgmtType": "Atlanta Malls"
       },
       {
         "id": {
-          "market": "20/Atlanta, GA/Digital Bulletins",
+          "seqno": "20",
+          "market": "Atlanta, GA",
+          "description": "Digital Bulletins",
           "coverage": "Unit B143",
-          "type": "Regular"
+          "path": ""
         },
         "date": "05/20/2018",
         // "facility": "123-456-12",
@@ -81,9 +137,13 @@ export class ShowingsComponent implements OnInit {
         "showingtype": "Unit",
         "units": "10",
         "duration": "1-4 weeks",
-        "netamt": "10,999.00"
+        "netamt": "10,999.00",
+        "invtMgmtType": "Atlanta Digital"
       }
     ];
+
+
+
 
     this.mediaTypes = [
       {
@@ -164,15 +224,12 @@ export class ShowingsComponent implements OnInit {
   }
 
   editRecord(product) {
-    console.log(product)
-    this.isNewTableRecord = false;
-    this.isEditable = true;
-
-    this.rows.filter(row => row.isEditable).map(r => {
-      r.isEditable = false;
-      return r;
-    })
-    product.isEditable = true;
+    // console.log(product)
+    // this.isNewTableRecord = false;
+    // this.isEditable = true;
+    this.selectedRow = product;
+    console.log(this.selectedRow)
+    this.displayShowingsDialog = true;
   }
 
   saveRecord(product) {

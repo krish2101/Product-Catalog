@@ -541,7 +541,7 @@
 
 <p-dialog [(visible)]="displayShowingsDialog" width="1200" [minHeight]="600" modal="true" responsive="true">
     <p-header>
-        {{ editShowings?.id?.market}} Showings
+        {{ editShowings?.id?.market}} - {{ editShowings?.id?.description}}
         <span *ngIf=" editShowings?.date"> - Effective Date {{ editShowings?.date | date: 'MM/dd/yyyy'}}</span>
     </p-header>
     <div>

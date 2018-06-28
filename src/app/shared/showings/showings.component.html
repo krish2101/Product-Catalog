@@ -1,4 +1,99 @@
 <div class="mt-3">
+    <div *ngIf="isCopyOfTableRecord">
+        <!-- {{newTableRecord | json}} -->
+        <table class="table table-responsive table-bordered">
+            <thead class="mythead">
+                <tr>
+                    <th>Market/Media</th>
+                    <th style="width: 230px;">Effective Date</th>
+                    <th style="width: 228px;">Media</th>
+                    <th style="width: 228px;">Inv Management Type</th>
+                    <th style="width: 160px;">Showing Type</th>
+                    <th style="width: 130px;">Units</th>
+                    <th>Duration</th>
+                    <th style="width: 165px;">Net Amount</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <div>
+                            <b>{{newTableRecord?.id['market']}} / {{newTableRecord?.id['description']}}</b>
+                        </div>
+                        <div>
+                            <span>
+                                <b>Coverage:</b>
+                            </span> {{newTableRecord?.id['coverage']}}
+                            <span>
+                                <a href="javascript:" (click)="saveRecord()">
+                                    <i class="fa fa-pencil" style="padding:5px;"></i>
+                                </a>
+                            </span>
+                            <div>
+                              Path:  {{newTableRecord?.id['path']}} 
+                            </div>
+                         
+                          </div>
+                        <div  style="font-size: 15px;">{{newTableRecord?.id['type']}}
+                        </div>
+
+
+                        
+                    </td>
+                    <td>
+                        <p-calendar id="effeectiveDate" showIcon="true" [(ngModel)]="newTableRecord.date"></p-calendar>
+                    </td>
+                    <td>
+                        <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.media">
+                            <option value="Digital Bulletins">Digital Bulletins</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.showingtype">
+                            <option value="Unit">Unit</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.invtMgmtType">
+                            <option value="Atlanta Malls">Atlanta Malls</option>
+                            <option value="Atlanta Digital">Atlanta Digital</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="" id="" class="form-control" [(ngModel)]="newTableRecord.units">
+                    </td>
+                    <td>
+                        <select name="" id="" class="form-control" [(ngModel)]="newTableRecord.duration">
+                            <option value="1-4 weeks">1-4 Weeks</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" [(ngModel)]="newTableRecord.netamt">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="text-right">
+                    <td colspan="8" class="p-1">
+                        <button class="btn btn-success" (click)="saveChanges()">
+                            Save Showings
+                        </button>
+                        <button class="btn btn-secondary" (click)="cancel()">
+                            Cancel
+                        </button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
   <p-dataTable [value]="rows" electionMode="multiple" [editable]="true" [immutable]="false" [scrollable]="true" scrollWidth="100%"
     frozenWidth="150px">
     <p-column [style]="{'width':'48px'}" selectionMode="multiple"> </p-column>
@@ -183,10 +278,10 @@
 
 <p-dialog [(visible)]="displayShowingsDialog" width="1200" [minHeight]="600" modal="true" responsive="true">
   <p-header>
-    <!-- {{selectedRow | json}} -->      {{ selectedRow?.id?.market}} - {{ selectedRow?.id?.description}} 
+    <!-- {{selectedRow | json}} -->{{ selectedRow?.id?.market}} - {{ selectedRow?.id?.description}}
     <span *ngIf=" selectedRow?.date"> - Effective Date {{ selectedRow?.date | date: 'MM/dd/yyyy'}}</span>
   </p-header>
-  <div>
+  <div *ngIf="selectedRow">
     <div style="margin: 5px 42px 5px  17px">
       <div class="card bg-light">
         <div class="card-body">
@@ -197,7 +292,7 @@
                   <div class="form-group">
                     <label for="Facility">Facility</label>
                     <select name="Facility" id="Facility" class="form-control">
-                      <option value="atlanta">Atlanta</option>
+                      <option value="Atlanta Malls">Atlanta Malls</option>
                     </select>
                   </div>
                 </div>
@@ -205,7 +300,7 @@
                   <div class="form-group">
                     <label for="subFacility">Sub Facility</label>
                     <select name="subFacility" id="subFacility" class="form-control">
-                      <option value="atlanta">Atlanta</option>
+                      <option value="Greenbriar Mall">Greenbriar Mall</option>
                     </select>
                   </div>
                 </div>
@@ -213,8 +308,8 @@
                   <div class="form-group">
                     <label for="groupSched">Group Schedule</label>
                     <select name="groupSched" id="groupSched" class="form-control">
-                      <option value="active">Active</option>
-                      <option value="inactive">InActive</option>
+                      <option value="Atlanta Bulletins">Atlanta Bulletins</option>
+                      <option value="Digital Bulletins">Digital Bulletins</option>
                     </select>
                   </div>
                 </div>
@@ -222,8 +317,10 @@
                   <div class="form-group">
                     <label for="Media">Media</label>
                     <select name="Media" id="Media" class="form-control">
-                      <option value="active">Active</option>
-                      <option value="inactive">InActive</option>
+                      <option value="Digital Bulletins">Digital Bulletins</option>
+                      <option value="Bus Shelters">Bus Shelters</option>
+                      <option value="Posters">Posters</option>
+                      <option value="Super Stacks">Super Stacks</option>
                     </select>
                   </div>
                 </div>
@@ -232,8 +329,8 @@
                   <div class="form-group">
                     <label for="InvntMgmtMedia">Inventory Management Media</label>
                     <select name="InvntMgmtMedia" id="InvntMgmtMedia" class="form-control">
-                      <option value="active">Active</option>
-                      <option value="inactive">InActive</option>
+                      <option value="Atlanta Bulletin Rates">Atlanta Bulletin Rates</option>
+                      <option value="Atlanta Digital Posters">Atlanta Digital Posters</option>
                     </select>
                   </div>
                 </div>
@@ -243,17 +340,17 @@
                   <div class="form-group">
                     <label for="MediaGroup">Media Group</label>
                     <select name="MediaGroup" id="MediaGroup" class="form-control">
-                      <option value="active">Active</option>
-                      <option value="inactive">InActive</option>
+                      <option value="Hill-Capital Station">Hill-Capital Station</option>
+                      <option value="Granbriar Mall">Granbriar Mall</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-8 col-sm-8">
                   <div class="form-group">
                     <label for="Coverage">Coverage</label>
-                    <select name="Coverage" id="Coverage" class="form-control">
-                      <option value="active">Active</option>
-                      <option value="inactive">InActive</option>
+                    <select name="Coverage" id="Coverage" class="form-control"  [(ngModel)]="selectedRow.id.coverage">
+                      <option value="Capital South">Capital South</option>
+                      <option value="Capital North">Capital North</option>
                     </select>
                   </div>
                 </div>
@@ -261,21 +358,25 @@
                 <div class="col-md-8 col-sm-8">
                   <div class="form-group">
                     <label for="Path">Path</label>
-                    <textarea name="Path" id="Path" cols="3" rows="3" class="form-control"></textarea>
+                    <textarea name="Path" id="Path" cols="3" rows="3" class="form-control" [(ngModel)]="selectedRow.id.path"></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
           <div class="row">
             <div class="col-md-12 col-sm-12">
               <p-dataTable [value]="newRateCardTypesRows" [immutable]="false" [rowsPerPageOptions]="[5,10,20]">
                 <p-column field="showings" header="Showings">
-                  <ng-template let-col let-row="rowData" pTemplate="body">
+                  <ng-template let-col let-row="rowData" pTemplate="body" let-index="rowIndex">
                     <div>
                       <select [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
-                        <option value=""></option>
+                        <option *ngIf="index == 0" value="{{rateCardShowingsList[0].value}}">{{rateCardShowingsList[0].label}}</option>
+                        <option *ngIf="index == 1" value="{{rateCardShowingsList[1].value}}">{{rateCardShowingsList[1].label}}</option>
+                        <option *ngIf="index == 2" value="{{rateCardShowingsList[2].value}}">{{rateCardShowingsList[2].label}}</option>
+                        <option *ngIf="index == 3" value="{{rateCardShowingsList[3].value}}">{{rateCardShowingsList[3].label}}</option>
+                        <option *ngIf="index == 4" value="{{rateCardShowingsList[4].value}}">{{rateCardShowingsList[4].label}}</option>
                       </select>
                     </div>
                   </ng-template>
@@ -287,7 +388,21 @@
                   </ng-template>
                 </p-column>
 
-                <p-column field="1-4Weeks" header="1-4 Weeks">
+                <p-column field="firstweekclms" header="1-4 Weeks">
+                  <ng-template let-col let-row="rowData" pTemplate="body">
+                      <!-- {{row[col.field]| currency:'USD'}} -->
+                    <div class="input-group" style="height: 33px;">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fa fa-dollar"></i>
+                        </span>
+                      </div>
+                      <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
+                    </div>
+                  </ng-template>
+                </p-column>
+
+                <p-column field="secondweekclms" header="5-12 Weeks">
                   <ng-template let-col let-row="rowData" pTemplate="body">
                     <div class="input-group" style="height: 33px;">
                       <div class="input-group-append">
@@ -300,7 +415,7 @@
                   </ng-template>
                 </p-column>
 
-                <p-column field="5-12Weeks" header="5-12 Weeks">
+                <p-column field="thirdweekclms" header="13-25 Weeks">
                   <ng-template let-col let-row="rowData" pTemplate="body">
                     <div class="input-group" style="height: 33px;">
                       <div class="input-group-append">
@@ -313,7 +428,7 @@
                   </ng-template>
                 </p-column>
 
-                <p-column field="13-25Weeks" header="13-25 Weeks">
+                <p-column field="fourthweekclms" header="26-41 Weeks">
                   <ng-template let-col let-row="rowData" pTemplate="body">
                     <div class="input-group" style="height: 33px;">
                       <div class="input-group-append">
@@ -326,20 +441,7 @@
                   </ng-template>
                 </p-column>
 
-                <p-column field="26-41Weeks" header="26-41 Weeks">
-                  <ng-template let-col let-row="rowData" pTemplate="body">
-                    <div class="input-group" style="height: 33px;">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <i class="fa fa-dollar"></i>
-                        </span>
-                      </div>
-                      <input type="text" [(ngModel)]="row[col.field]" appendTo="body" class="form-control">
-                    </div>
-                  </ng-template>
-                </p-column>
-
-                <p-column field="52Weeks" header="52 Weeks">
+                <p-column field="fifthweekclms" header="52 Weeks">
                   <ng-template let-col let-row="rowData" pTemplate="body">
                     <div class="input-group" style="height: 33px;">
                       <div class="input-group-append">

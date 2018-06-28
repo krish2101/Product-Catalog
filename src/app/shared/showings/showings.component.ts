@@ -14,7 +14,6 @@ export class ShowingsComponent implements OnInit {
   mediaTypes: any = [];
   newTableRecord: any = {};
   displayShowingsDialog: boolean = false;
-
   items: any = [];
 
   showingsList: any = [
@@ -25,7 +24,24 @@ export class ShowingsComponent implements OnInit {
     }
   ];
 
-  selectedRow = {};
+  selectedRow = {
+    "id": {
+      "seqno": "",
+      "market": "",
+      "description": "",
+      "coverage": "",
+      "path": "",
+    },
+    "date": "",
+    // "facility": "123-456-12",
+    "media": "",
+    // "inventory": "",
+    "showingtype": "",
+    "units": "",
+    "duration": "",
+    "netamt": "",
+    "invtMgmtType": ""
+  };
 
   selectedItems: any = [];
   showProdTable: boolean = false;
@@ -33,56 +49,79 @@ export class ShowingsComponent implements OnInit {
   display: boolean = false;
   isNewTableRecord: boolean = false;
   displayAddNewShowing: boolean = false;
-
+  isCopyOfTableRecord: boolean = false;
   products: any = [];
 
   constructor(private productService: ProductService, private router: Router) { }
 
   newRateCardTypesRows = [
     {
-      "showings": "",
-      "units": "",
-      "1-4Weeks": "",
-      "5-12Weeks": "",
-      "13-25Weeks": "",
-      "26-41Weeks": "",
-      "52Weeks": ""
+      "showings": "Unit",
+      "units": "1",
+      "firstweekclms": "1200",
+      "secondweekclms": "2000",
+      "thirdweekclms": "3200",
+      "fourthweekclms": "4500",
+      "fifthweekclms": "5500"
     },
     {
-      "showings": "",
-      "units": "",
-      "1-4Weeks": "",
-      "5-12Weeks": "",
-      "13-25Weeks": "",
-      "26-41Weeks": "",
-      "52Weeks": ""
+      "showings": "100",
+      "units": "300",
+      "firstweekclms": "899",
+      "secondweekclms": "1200",
+      "thirdweekclms": "2000",
+      "fourthweekclms": "2800",
+      "fifthweekclms": "3500"
     },
     {
-      "showings": "",
-      "units": "",
-      "1-4Weeks": "",
-      "5-12Weeks": "",
-      "13-25Weeks": "",
-      "26-41Weeks": "",
-      "52Weeks": ""
+      "showings": "75",
+      "units": "200",
+      "firstweekclms": "1099",
+      "secondweekclms": "2200",
+      "thirdweekclms": "3400",
+      "fourthweekclms": "4900",
+      "fifthweekclms": "6500"
     },
     {
-      "showings": "",
-      "units": "",
-      "1-4Weeks": "",
-      "5-12Weeks": "",
-      "13-25Weeks": "",
-      "26-41Weeks": "",
-      "52Weeks": ""
+      "showings": "50",
+      "units": "125",
+      "firstweekclms": "549",
+      "secondweekclms": "1100",
+      "thirdweekclms": "2100",
+      "fourthweekclms": "3600",
+      "fifthweekclms": "4500"
     },
     {
-      "showings": "",
-      "units": "",
-      "1-4Weeks": "",
-      "5-12Weeks": "",
-      "13-25Weeks": "",
-      "26-41Weeks": "",
-      "52Weeks": ""
+      "showings": "25",
+      "units": "25",
+      "firstweekclms": "349",
+      "secondweekclms": "749",
+      "thirdweekclms": "1200",
+      "fourthweekclms": "1800",
+      "fifthweekclms": "2500"
+    }
+  ];
+
+  rateCardShowingsList = [
+    {
+      "label": "Unit",
+      "value": "Unit"
+    },
+    {
+      "label": "100",
+      "value": "100"
+    },
+    {
+      "label": "75",
+      "value": "75"
+    },
+    {
+      "label": "50",
+      "value": "50"
+    },
+    {
+      "label": "25",
+      "value": "25"
     }
   ];
 
@@ -109,7 +148,7 @@ export class ShowingsComponent implements OnInit {
           "seqno": "10",
           "market": "Atlanta, GA",
           "description": "Digital Bulletins",
-          "coverage": "Unit B143",
+          "coverage": "Capital South",
           "path": "oms.outfrontmedia.com",
         },
         "date": "06/15/2018",
@@ -127,7 +166,7 @@ export class ShowingsComponent implements OnInit {
           "seqno": "20",
           "market": "Atlanta, GA",
           "description": "Digital Bulletins",
-          "coverage": "Unit B143",
+          "coverage": "Capital North",
           "path": ""
         },
         "date": "05/20/2018",
@@ -141,6 +180,7 @@ export class ShowingsComponent implements OnInit {
         "invtMgmtType": "Atlanta Digital"
       }
     ];
+
 
 
 
@@ -207,7 +247,7 @@ export class ShowingsComponent implements OnInit {
 
   copyRecord(record) {
     console.log(record)
-    this.isNewTableRecord = true;
+    this.isCopyOfTableRecord = true;
     this.newTableRecord = Object.assign({}, record);
     // this.newTableRecord = record;
   }
@@ -216,6 +256,7 @@ export class ShowingsComponent implements OnInit {
     console.log(this.newTableRecord)
     this.rows.push(this.newTableRecord);
     this.isNewTableRecord = false;
+    this.isCopyOfTableRecord = false;
   }
 
   cancel() {
